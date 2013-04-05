@@ -4,7 +4,8 @@ object MaxCommonSequence {
     val init = (1 to (s1.length + 1)).foldLeft(List((0, List.empty[T]))) {(acc, x) => (0, List.empty[T]) :: acc }
     
     s2.foldLeft(init) {(acc, x) =>
-      s1.zip(acc.zip(acc.tail)).foldLeft(List((0, List.empty[T]))) { (step, e) =>
+      val current = acc.reverse
+      s1.zip(current.zip(current.tail)).foldLeft(List((0, List.empty[T]))) { (step, e) =>
         val left = step.head
         val top = e._2._2
         val diag = e._2._1
@@ -13,8 +14,8 @@ object MaxCommonSequence {
           else
             if (left._1 > top._1) left else top
         c :: step
-      }.reverse
-    }.last._2.reverse
+      }
+    }.head._2.reverse
   }
   def main(args: Array[String]): Unit = {
     val l1 = List(1,2,3,4,5,6)
