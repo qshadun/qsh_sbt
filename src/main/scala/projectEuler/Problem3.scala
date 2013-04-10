@@ -14,7 +14,8 @@ object Problem3 {
   }
   
   def findLargestFactor(n: Long) = {
-    lazy val naturals: Stream[Int] = Stream.cons(1, naturals.map(_ + 1))
+    //lazy val naturals: Stream[Int] = Stream.cons(1, naturals.map(_ + 1))
+    val naturals = Stream.iterate(1)(_ + 1)
     var theNum = n
     naturals.drop(1).dropWhile(n => {while(theNum % n == 0) {theNum /= n}; theNum > 1}).head
   }
