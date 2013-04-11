@@ -1,4 +1,6 @@
 import java.io.File
+
+import scala.Array.canBuildFrom
 object QUtils {
   /**
    * Used for reading/writing to database, files, etc.
@@ -16,6 +18,14 @@ object QUtils {
       case _ => Nil
     }
   }
-  
+
   def recursiveListFile(path: String): Array[File] = recursiveListFile(new File(path))(_ => false)(_ => true)
+
+  def time[R](block: => R): R = {
+    val t0 = System.nanoTime()
+    val result = block // call-by-name
+    val t1 = System.nanoTime()
+    println("Elapsed time: " + (t1 - t0) + "ns")
+    result
+  }
 }
