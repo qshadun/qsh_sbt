@@ -27,9 +27,10 @@ object Problem11 {
     loop(0, 1)
   }
   
-  def findDivisibles(n: Int) = (1 to Math.ceil(Math.sqrt(n)).toInt).filter(n % _ == 0).map(x => List(x, n/x)).flatten.distinct
+  def findDivisibles(n: Int) = (1 to Math.sqrt(n).toInt).filter(n % _ == 0)
+  //.map(x => List(x, n/x)).flatten.distinct
   def main(args: Array[String]): Unit = {
-    val x = trs.dropWhile(findDivisibles(_).size < 500).head
+    val x = trs.dropWhile(findDivisibles(_).size < 250).head
     println(x)
     val divs = findDivisibles(x)
     println(divs.sortBy(x => x))
