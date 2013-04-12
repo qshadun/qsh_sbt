@@ -1,4 +1,4 @@
-package projectEuler
+package projecteuler
 
 /**
  * Largest palindrome product

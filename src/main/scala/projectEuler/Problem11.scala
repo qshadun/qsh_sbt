@@ -20,13 +20,12 @@ We can see that 28 is the first triangle number to have over five divisors.
 
 What is the value of the first triangle number to have over five hundred divisors?
  */
-object Problem11 {
+object Problem12 {
 
   val trs = {
     def loop(s: Int, n: Int):Stream[Int] = {println(s+n); (s+n) #:: loop(s+n, n+1)}
     loop(0, 1)
-  }
-  
+  }  
   def findDivisibles(n: Int) = (1 to Math.sqrt(n).toInt).filter(n % _ == 0)
   //.map(x => List(x, n/x)).flatten.distinct
   def main(args: Array[String]): Unit = {

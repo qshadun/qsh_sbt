@@ -1,4 +1,4 @@
-package projectEuler
+package projecteuler
 
 /**
  * Multiples of 3 and 5

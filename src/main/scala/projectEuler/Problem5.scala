@@ -1,4 +1,4 @@
-package projectEuler
+package projecteuler
 import scala.collection.mutable.Map
 /**
  * Smallest multiple

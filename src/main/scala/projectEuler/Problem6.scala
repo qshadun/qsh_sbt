@@ -1,4 +1,4 @@
-package projectEuler
+package projecteuler
 
 object Problem6 {
 

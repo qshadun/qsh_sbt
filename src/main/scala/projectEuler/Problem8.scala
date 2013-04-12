@@ -1,4 +1,4 @@
-package projectEuler
+package projecteuler
 /**
  * Largest product in a series
 Problem 8

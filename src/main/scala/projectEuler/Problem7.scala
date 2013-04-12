@@ -1,4 +1,4 @@
-package projectEuler
+package projecteuler
 import scala.annotation.tailrec
 /**
  * 10001st prime

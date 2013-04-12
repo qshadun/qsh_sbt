@@ -1,4 +1,4 @@
-package projectEuler
+package projecteuler
 /**
  * Special Pythagorean triplet
  * Problem 9

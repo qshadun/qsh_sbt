@@ -1,4 +1,4 @@
-package projectEuler
+package projecteuler
 
 /**
  * Even Fibonacci numbers
