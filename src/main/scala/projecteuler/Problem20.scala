@@ -14,5 +14,4 @@ object Problem20 {
   def main(args: Array[String]): Unit = {
     println(factotrial(100).toString.toCharArray().map(_ - 48).sum)
   }
-
 }
