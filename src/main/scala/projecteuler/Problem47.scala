@@ -38,7 +38,22 @@ object Problem47 {
     def find(start: Int, consecutive: Int): Int = 
       if ((0 until consecutive).map(start + _).forall(numOfPrimeFactors(_) == consecutive)) start
       else (find(start + 1, consecutive))
-    println(find(1, 4))
+//    println(find(1, 4))
+      println(sieve)
+  }
+  
+  def sieve = {
+    val lim = 1000000
+    val sieve = Array.fill(1000000)(0)
+    val sec = 4
+    val expect = List.fill(sec)(sec)
+    (2 to math.sqrt(lim).toInt).foreach{x =>
+      if (sieve(x) == 0)
+        ((x + x) until lim by x).foreach {i => 
+          sieve(i) = sieve(i) + 1
+      }
+    }
+    (2 until lim - sec).find(x => sieve.slice(x, x + sec).toList == expect).get
   }
 
 }
