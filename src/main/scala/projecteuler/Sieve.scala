@@ -1,7 +1,7 @@
 package projecteuler
 
 case class Sieve(bound: Int) {
-  private val sieve = Array.fill(1000000)(0)
+  private val sieve = Array.fill(bound)(0)
   (2 to math.sqrt(bound).toInt).foreach { x =>
     if (sieve(x) == 0)
       ((x + x) until bound by x).foreach { i =>
