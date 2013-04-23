@@ -38,7 +38,7 @@ case class Sieve(bound: Int) {
         sieve(i) = sieve(i) + 1
       }
   }
-  def getPrimes = for (i <- 2 until bound; if sieve(i) == 0) yield i
+  lazy val getPrimes = for (i <- 2 until bound; if sieve(i) == 0) yield i
   def isPrime(n: Int) = {
     require(n < bound && n > 0)
     sieve(n) == 0
