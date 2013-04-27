@@ -3,10 +3,10 @@ object Problem66 {
   def main(args: Array[String]) = {
     val squares = (1 to 10000000).map(x => 1L * x * x)
     val ds = (2 to 1000).toList -- squares.takeWhile(_ <= 1000).map(_.toInt).toList
-//  def isPerfectSquare(n: Long) = {
-//    val root = math.sqrt(n).toLong
-//    root * root == n
-//  }
+    def isPerfectSquare(n: BigInt) = {
+      val root = BigDecimal(math.sqrt(n.toDouble)).toBigInt
+      root * root == n
+    }
 //  val result = ds.map{d =>
 //    val ySquare = squares.find{y => 
 //      val xSquare = 1 + d * y 
@@ -26,7 +26,7 @@ object Problem66 {
 // (x + 1) (x - 1) = D * y * y, list the sequence of (x + 1)(x - 1), each x is the minimum for which D until all D under 1000 are exhausted
   def factorials(n: BigInt): List[(BigInt, Int)] = {
     def recur(f: BigInt, r: BigInt, fs: List[(BigInt, Int)]): List[(BigInt, Int)] = {
-      if (r == 1) fs
+      if (r == 1) fs.sortBy(_._1)
       else 
         if (r % f == 0)
           if (fs.size > 0 && fs.head._1 == f) recur(f, r/f, (fs.head._1, fs.head._2 + 1) :: fs.tail)
@@ -37,23 +37,26 @@ object Problem66 {
   }
   def combine(fs1: List[(BigInt, Int)], fs2: List[(BigInt, Int)]) = 
     (fs1 ::: fs2).groupBy(_._1).map(x => if (x._2.size ==1) x._2.head else (x._1, x._2.head._2 + x._2.last._2)).toList
+  def check(x1: BigInt, x2: BigInt, d: Int) = x1 * x2 % d == 0 && isPerfectSquare(x1 * x2 / d)
   def findX(d: Int) = {
-    def check(x1: BigInt, x2: BigInt) = combine(factorials(x1), factorials(x2)).forall(_._2 % 2 == 0)
+    val factors = factorials(d)
+    val largestFactor = factors.last._1
     var finded = false
     var x = BigInt(0)
     var t = BigInt(1)
     while (!finded) {
       // (x + 1)(x - 1), one number can divide d, the qua times another number is a square
-      val x1 = d * t
-      if (x1 > 2 && check(t, x1 - 2)) {
+      val x1 = largestFactor * t
+      if (x1 > 2 && check(x1, x1 - 2, d)) {
         finded = true
         x = x1 - 1
-      } else if (check(t, x1 + 2)) {
+      } else if (check(x1, x1 + 2, d)) {
         finded = true
         x = x1 + 1
       }
       if (!finded) t = t + 1
     }
+    println(d + ", " + x)
     x
   }
   val result = ds.map(findX)
