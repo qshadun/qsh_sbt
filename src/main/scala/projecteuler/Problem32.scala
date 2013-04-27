@@ -2,12 +2,11 @@ package projecteuler
 /**
 Pandigital products
 Problem 32
-Published on Friday, 6th December 2002, 06:00 pm; Solved by 27885
 We shall say that an n-digit number is pandigital if it makes use of all the digits 1 to n exactly once; 
 for example, the 5-digit number, 15234, is 1 through 5 pandigital.
 
-The product 7254 is unusual, as the identity, 39 * 186 = 7254, containing multiplicand, multiplier, a
-nd product is 1 through 9 pandigital.
+The product 7254 is unusual, as the identity, 39 * 186 = 7254, containing multiplicand, multiplier, and product is 
+1 through 9 pandigital.
 
 Find the sum of all products whose multiplicand/multiplier/product identity can be written as a 1 through 9 pandigital.
 
@@ -20,14 +19,14 @@ object Problem32 {
   val pandigitals =  
     for(
         a <- digits;
-        b <- digits - a;
-        c <- digits - a - b;
-        d <- digits - a - b - c;
-        e <- digits - a - b - c - d;
-        f <- digits - a - b - c - d - e;
-        g <- digits - a - b - c - d - e - f;
-        h <- digits - a - b - c - d - e - f - g;
-        i <- digits - a - b - c - d - e - f - g - h;
+        b <- digits.filterNot(_ == a);
+        c <- digits.filterNot(List(a, b) contains);
+        d <- digits.filterNot(List(a, b, c) contains);
+        e <- digits.filterNot(List(a, b, c, d) contains);
+        f <- digits.filterNot(List(a, b, c, d, e) contains);
+        g <- digits.filterNot(List(a, b, c, d, e, f) contains);
+        h <- digits.filterNot(List(a, b, c, d, e, f, g) contains);
+        i <- digits.filterNot(List(a, b, c, d, e, f, g, h) contains);
         val n1 = (a + b).toInt;
         val n2 = (c + d + e).toInt;
         val n3 = (f + g + h + i).toInt;

@@ -13,7 +13,7 @@ object Problem61 {
           if (sofar.head.substring(2,4) == sofar.last.substring(0,2)) List(sofar) else Nil
         else {
           candidates.filter(_.find(_.startsWith(sofar.head.substring(2,4))).isDefined).map{cs =>
-            cs.filter(_.startsWith(sofar.head.substring(2,4))).map(x => recur(x :: sofar, candidates - cs)).flatten
+            cs.filter(_.startsWith(sofar.head.substring(2,4))).map(x => recur(x :: sofar, candidates.filterNot(_ == cs))).flatten
           }.flatten
         }
       }

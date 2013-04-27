@@ -14,7 +14,7 @@ object Problem1 {
       val n = for (x <- l) yield List(x * 3, x * 5)
       l #:: f(n.flatten)
     }
-    f(start).takeWhile(ls => ls.exists(_ <= max)).toList.flatten.distinct.sort(_ < _).takeWhile(_ <= max)
+    f(start).takeWhile(ls => ls.exists(_ <= max)).toList.flatten.distinct.sortWith(_ < _).takeWhile(_ <= max)
   }
   
   def findAllNumbers1(max: Int): List[Int] = {

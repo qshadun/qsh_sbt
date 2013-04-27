@@ -78,7 +78,7 @@ class ConnectedGame(val dimension: Int, val streak: Int) {
   def retry[T](expr: => T): T = {
     var i: Option[T] = None
     do {
-      i = try { Some(expr) } catch { case _ => None }
+      i = try { Some(expr) } catch { case _: Throwable => None }
     } while (i == None)
     i.get
   }

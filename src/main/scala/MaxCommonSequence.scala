@@ -1,6 +1,6 @@
 object MaxCommonSequence {
 
-  def maxCommonSequence[T](s1: Sequence[T], s2: Sequence[T]): Sequence[T] = {
+  def maxCommonSequence[T](s1: Seq[T], s2: Seq[T]): Seq[T] = {
     val init = (1 to (s1.length + 1)).foldLeft(List((0, List.empty[T]))) {(acc, x) => (0, List.empty[T]) :: acc }
     
     s2.foldLeft(init) {(acc, x) =>
