@@ -20,7 +20,7 @@ In the first one-thousand expansions, how many fractions contain a numerator wit
  */
 object Problem57 {
   def main(args: Array[String]): Unit = {
-    def iterate(r: Rational) = (1 + Rational(1,  1 + r)).normalize
+    def iterate(r: Rational) = (1 + 1 / (1 + r)).normalize
     println((1 to 1000).foldLeft((Rational(1), 0)){(acc, x)=>
       val it = iterate(acc._1)
       if (it.n.toString.size > it.d.toString.size) (it, acc._2 + 1) else (it, acc._2)
