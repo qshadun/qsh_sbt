@@ -18,7 +18,7 @@ object Problem35 {
       val nStr = n.toString
       val rots = for (
         i <- 0 to nStr.length - 1;
-        val r = nStr.slice(i, nStr.length) + nStr.slice(0, i)
+        r = nStr.slice(i, nStr.length) + nStr.slice(0, i)
       ) yield(r.toInt)
       rots.filter(_.toString.length == nStr.length)
     }

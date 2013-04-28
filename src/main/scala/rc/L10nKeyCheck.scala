@@ -1,11 +1,10 @@
-import java.util.ResourceBundle
-import java.net.URLClassLoader
 import java.io.File
+import java.net.URLClassLoader
 import java.util.Locale
-import java.util.Collections
+import java.util.ResourceBundle
+
+import scala.Array.canBuildFrom
 import scala.collection.mutable
-import java.io.PrintWriter
-import java.io.PrintStream
 object L10nKeyCheck {
   val BASE_PATH = "C:/devl/projects/rc920/app/l10n"
   val SUB_PATH = "src/main/resources"
@@ -16,7 +15,7 @@ object L10nKeyCheck {
   val DEFAULT_RESOURCE_FOLDER = concatPath(BASE_PATH, DEFAULT_FOLDER, SUB_PATH) 
   
   def getResourceUrl(basePath: String, lan: String, subPath: String) = 
-    new File(concatPath(basePath, lan, subPath)).toURL
+    new File(concatPath(basePath, lan, subPath)).toURI.toURL()
     
   def concatPath(s: String*) = s.mkString(File.separator)
   

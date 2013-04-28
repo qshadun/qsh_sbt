@@ -27,12 +27,12 @@ object Problem32 {
         g <- digits.filterNot(List(a, b, c, d, e, f) contains);
         h <- digits.filterNot(List(a, b, c, d, e, f, g) contains);
         i <- digits.filterNot(List(a, b, c, d, e, f, g, h) contains);
-        val n1 = (a + b).toInt;
-        val n2 = (c + d + e).toInt;
-        val n3 = (f + g + h + i).toInt;
-        val n4 = a.toInt;
-        val n5 = (b + c + d + e).toInt;
-        val r:(Int, Int, Int) =  
+        n1 = (a + b).toInt;
+        n2 = (c + d + e).toInt;
+        n3 = (f + g + h + i).toInt;
+        n4 = a.toInt;
+        n5 = (b + c + d + e).toInt;
+        r =  
           if (n1 * n2 == n3) (n1, n2, n3) 
           else 
             if(n4 * n5 == n3) (n4, n5, n3) else (0, 0, 0);

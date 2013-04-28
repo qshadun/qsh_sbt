@@ -28,6 +28,7 @@ object Rational {
   def apply(x: (Int, Int)) = new Rational(x._1, x._2)
   def apply(x: Int) = new Rational(x, 1)
   def apply(x: Rational, y: Rational) = new Rational(x.n * y.d, x.d * y.n)
+  import scala.language.implicitConversions
   implicit def intToRational(x: Int) = Rational(x)
 }
 case class Sieve(bound: Int) {

@@ -1,4 +1,4 @@
-package projectEuler
+package projecteuler
 
 /**
 Highly divisible triangular number

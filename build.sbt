@@ -9,3 +9,5 @@ libraryDependencies ++= Seq(
     "org.specs2" %% "specs2" % "1.14" % "test",
 	"junit" % "junit" % "4.8.1" % "test"
 )
+
+scalacOptions += "-deprecation"

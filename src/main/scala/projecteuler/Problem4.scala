@@ -18,7 +18,7 @@ object Problem4 {
   def main(args: Array[String]): Unit = {
       val v = for(x <- List.range(999, 900, -1); 
                   y <- List.range(x, 900, -1);
-                  val p = x * y if isPalindromic(p)) yield (p, x, y)
+                  p = x * y if isPalindromic(p)) yield (p, x, y)
       println(v.sortWith(_._1 > _._1).head)
       //println(v.dropWhile(!isPalindromic(_)).head)
   }

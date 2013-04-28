@@ -40,8 +40,8 @@ object Problem33 {
       i <- digits;
       j <- digits;
       k <- digits;
-      val ji = (j + i).toInt;
-      val ik = (i + k).toInt;
+      ji = (j + i).toInt;
+      ik = (i + k).toInt;
       if ji < ik && Rational(ji, ik).normalize == Rational(j.toInt, k.toInt).normalize
     ) yield (ji, ik)
 

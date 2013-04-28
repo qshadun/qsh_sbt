@@ -1,6 +1,6 @@
 import java.io.File
 import java.io.PrintWriter
-object LineWrapper extends Application {
+object LineWrapper extends App {
   var WidthLimit = 60
   var inFile = "symptoms.txt"
   val outFile = inFile + ".w"
