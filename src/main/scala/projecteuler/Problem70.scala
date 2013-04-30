@@ -24,8 +24,8 @@ so pi must be as large as possible; my minimum prime was 1009.
  */
 object Problem70 {
   def main(args: Array[String]) = {
-    val bound = 10000000
-	def sieve = Sieve(1000000)
+  val bound = 10000000
+	val sieve = Sieve(1000000)
 	val primes = sieve.getPrimes.dropWhile(_ < 1009).takeWhile(_ <= 2 * math.sqrt(bound).toInt)
 	val result = primes.map{x =>
 	  primes.dropWhile(_ <= x).takeWhile(_ * x <= bound).filter{y =>
