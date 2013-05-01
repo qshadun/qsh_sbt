@@ -1,4 +1,5 @@
 package projecteuler;
+//http://mathworld.wolfram.com/PythagoreanTriple.html
 public class Problem075{
     private static final int bound = 1500000;
     private static final byte[] ar = new byte[bound + 1];
