@@ -3,6 +3,15 @@ package projecteuler
 object Sudoku {
   case class SudokuResult(result: Seq[Seq[Int]]) extends Exception
   val numbers = List.tabulate(9)(_ + 1)
+  val boxCorordinates = 
+    for (
+      x <- 0 to 6 by 3;
+      y <- 0 to 6 by 3
+    ) yield {
+      val xs = List(x, x + 1, x + 2)
+      val ys = List(y, y + 1, y + 2)
+      for (i <- xs; j <- ys) yield (i, j)
+    }
   def solve(puzzle: Seq[Seq[Int]]): Seq[Seq[Int]] = {
     def recur(pz: Seq[Seq[Int]]): Unit = {
       def findLeastPossibleValues: ((Int, Int), List[Int]) = {
@@ -26,14 +35,9 @@ object Sudoku {
           }
         }
         // 3*3 boxes
-        for (
-          x <- 0 to 6 by 3;
-          y <- 0 to 6 by 3
-        ) {
-          val xs = List(x, x + 1, x + 2)
-          val ys = List(y, y + 1, y + 2)
-          val used = for (i <- xs; j <- ys; if pz(i)(j) != 0) yield pz(i)(j)
-          for (i <- xs; j <- ys; if pz(i)(j) == 0) {
+        boxCorordinates.foreach {ls =>
+          val used = for ((i, j) <- ls; if pz(i)(j) != 0) yield pz(i)(j)
+          for ((i, j) <- ls; if pz(i)(j) == 0) {
             ps((i, j)) = ps((i, j)).filterNot(used.contains)
           }
         }
