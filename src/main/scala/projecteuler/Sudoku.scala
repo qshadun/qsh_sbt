@@ -5,24 +5,43 @@ object Sudoku {
   val numbers = List.tabulate(9)(_ + 1)
   def solve(puzzle: Seq[Seq[Int]]): Seq[Seq[Int]] = {
     def recur(pz: Seq[Seq[Int]]): Unit = {
-      def indexGroup(n: Int): List[Int] =
-        if (n < 3) List(0, 1, 2)
-        else if (n < 6) List(3, 4, 5)
-        else List(6, 7, 8)
-      def possibleValues(x: Int, y: Int): List[Int] = {
-        val usedInLine = pz(x).filterNot(_ == 0)
-        val usedInColumn = (0 until 8).map(pz(_)(y)).filterNot(_ == 0)
-        val usedInBox = (for (
-          i <- indexGroup(x);
-          j <- indexGroup(y)
-        ) yield pz(i)(j)).filterNot(_ == 0)
-        val used = usedInLine ++ usedInColumn ++ usedInBox
-        numbers.filterNot(used.contains)
+      def findLeastPossibleValues: ((Int, Int), List[Int]) = {
+        import scala.collection.mutable
+        val ps = mutable.Map.empty[(Int, Int), List[Int]]
+        //lines
+        (0 to 8).map { i =>
+          val used = pz(i).filterNot(_ == 0).distinct
+          val canUse = numbers.filterNot(used.contains)
+          (0 to 8).foreach { j =>
+            if (pz(i)(j) == 0)
+              ps((i, j)) = canUse
+          }
+        }
+        //columns
+        (0 to 8).map { j =>
+          val used = (0 to 8).map(pz(_)(j)).filterNot(_ == 0).distinct
+          (0 to 8).foreach { i =>
+            if (pz(i)(j) == 0)
+              ps((i, j)) = ps((i, j)).filterNot(used.contains)
+          }
+        }
+        // 3*3 boxes
+        for (
+          x <- 0 to 6 by 3;
+          y <- 0 to 6 by 3
+        ) {
+          val xs = List(x, x + 1, x + 2)
+          val ys = List(y, y + 1, y + 2)
+          val used = for (i <- xs; j <- ys; if pz(i)(j) != 0) yield pz(i)(j)
+          for (i <- xs; j <- ys; if pz(i)(j) == 0) {
+            ps((i, j)) = ps((i, j)).filterNot(used.contains)
+          }
+        }
+        ps.toList.minBy(_._2.size)
       }
       if (pz.forall(line => line.forall(_ != 0))) throw SudokuResult(pz)
       else {
-        val ps = for (i <- 0 to 8; j <- 0 to 8; if pz(i)(j) == 0) yield ((i, j), possibleValues(i, j))
-        val least = ps.sortBy(_._2.size).head
+        val least = findLeastPossibleValues
         if (least._2.isEmpty) return // no possible value
         else {
           val (x, y) = least._1
@@ -46,7 +65,6 @@ object Sudoku {
       case e: SudokuResult => e.result
     }
   }
-
   def printResult(seq: Seq[Seq[Int]]) = {
     require(seq.size == 9)
     require(seq.forall(_.size == 9))
@@ -72,12 +90,10 @@ object Sudoku {
     val input = Source.fromURL(getClass.getResource("/sudoku.txt")).getLines.grouped(10).map { lines =>
       lines.tail.map(_.map(_ - '0'))
     }
-    val solutions = input.map(solve).toList
-    solutions.foreach(printResult)
+    val solutions = input.map(solve)
     val numbers = solutions.map { su =>
       List(su(0)(0), su(0)(1), su(0)(2)).mkString.toInt
     }
-    println(numbers)
     println(numbers.sum)
     //    val pz = List(
     //          List(0,0,3,0,2,0,6,0,0),
