@@ -8,7 +8,7 @@ import Utils._
 case class Rational(n: BigInt, d: BigInt) extends Ordered[Rational]{
   require(d != 0)
   def normalize = {
-    val g = gcd(n, d)
+    val g = if (n < 0) gcd(-n, d) else gcd(n, d)
     new Rational(n / g, d / g)
   }
   def +(that: Rational) = {
@@ -36,9 +36,11 @@ case class Rational(n: BigInt, d: BigInt) extends Ordered[Rational]{
 }
 object Rational {
   def apply(x: (Int, Int)) = new Rational(x._1, x._2)
-  def apply(x: Int) = new Rational(x, 1)
+  def apply(x: Int) = new Rational(BigInt(x), BigInt(1))
   import scala.language.implicitConversions
   implicit def intToRational(x: Int) = Rational(x)
+  implicit def BigIntToRational(x: BigInt) = new Rational(x, BigInt(1))
+  implicit def LongToRational(x: Long) = new Rational(BigInt(x), BigInt(1))
 }
 case class Sieve(bound: Int) {
   private val sieve = Array.fill(bound)(0)
