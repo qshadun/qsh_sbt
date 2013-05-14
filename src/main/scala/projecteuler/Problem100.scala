@@ -33,7 +33,7 @@ object Problem100 {
     val n2 = k * (k - 1)
     val d1 = n * (n + 1)
     val d2 = n * (n - 1)
-    if (2 * n1 == d1 || 2 * n1 == d2) println(k-1)
+    if (2 * n1 == d1 || 2 * n1 == d2) println(k + 1)
     else println(k)
   }
 }
