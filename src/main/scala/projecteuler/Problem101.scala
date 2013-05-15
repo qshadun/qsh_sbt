@@ -21,7 +21,7 @@ object Problem101 {
           val j = (i + 1 to m.length - 1).find(m(_)(i).n != 0).get
           swapRow(i, j)
         }
-        //make dialog 1
+        //make diagonal 1
         for (j <- i + 1 to m.length)
           m(i)(j) = (m(i)(j) / m(i)(i)).normalize
         m(i)(i) = 1
@@ -67,6 +67,12 @@ object Problem101 {
     println(fits)
     fits.sum
   }
+  def findPolynominal(sq: Seq[Int]) = {
+    val matrix = Array.tabulate(sq.size)(_ + 1).map { i =>
+      Array.tabulate(sq.size)(identity).map { BigInt(i).pow(_) } :+ BigInt(sq(i - 1))
+    }
+    findCoefficients(matrix).toList
+  }
   def main(args: Array[String]): Unit = {
     //    val seq = toSequence(Stream.continually(List(1, -1)).flatten.map(BigInt.apply).take(11).toArray) 
     //    println(seq.take(20).toList)
@@ -79,5 +85,6 @@ object Problem101 {
     //        ).map(_.map(BigInt.apply))
     //    println(solveMatrix(m).toList)
     println(sumFit(Stream.continually(List(1, -1)).flatten.map(BigInt.apply).take(11).toArray))
+//    println(findPolynominal(Array(1,3,5,7,9)))
   }
 }
