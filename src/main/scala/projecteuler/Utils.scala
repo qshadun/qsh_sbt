@@ -37,6 +37,8 @@ case class Rational(n: BigInt, d: BigInt) extends Ordered[Rational]{
 object Rational {
   def apply(x: (Int, Int)) = new Rational(x._1, x._2)
   def apply(x: Int) = new Rational(BigInt(x), BigInt(1))
+  def apply(x: BigInt) = new Rational(x, BigInt(1))
+  def apply(x: Long) = new Rational(BigInt(x), BigInt(1))
   import scala.language.implicitConversions
   implicit def intToRational(x: Int) = Rational(x)
   implicit def BigIntToRational(x: BigInt) = new Rational(x, BigInt(1))
