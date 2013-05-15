@@ -1,5 +1,5 @@
 package projecteuler
-
+//Triangle containment
 object Problem102 {
   // y = k*x + d
   def calcLine(p1: (Double, Double), p2: (Double, Double)): (Double, Double) = {
