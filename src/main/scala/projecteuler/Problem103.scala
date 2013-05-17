@@ -1,5 +1,5 @@
 package projecteuler
-
+//Special subset sums: optimum
 object Problem103 {
   import Problem105._
   def main(args: Array[ String]): Unit = {
@@ -7,5 +7,4 @@ object Problem103 {
     println(r.toList)
     println(r.mkString)
   }
-
 }
