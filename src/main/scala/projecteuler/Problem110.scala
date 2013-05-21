@@ -1,5 +1,12 @@
 package projecteuler
-//If n = (p1^a1)(p2^a2)...(pt^at), a(n) = ((2 a1 + 1)(2 a2 + 1) ... (2 at + 1) + 1)/2.
+/**
+If n = (p1^a1)(p2^a2)...(pt^at), a(n) = ((2 * a1 + 1)(2 * a2 + 1) ... (2 * at + 1) + 1)/2. (http://oeis.org/A018892)
+p1, p2, ..., pt are prime factors of n.
+So the base solution for this problem is the product of the first 15 primes (3 ^ 15 > 8000000)
+Then I tried to decrease the number of prime factors to 14. 
+Start from a1 = a2 = ... = a14 = 1, increase the exponents heuristically and find the smallest number which has more than 4000000 solutions.
+Then find the smallest number for 13 prime factors until I can find a smaller number.
+ */
 object Problem110 {
   val sieve = Sieve(100)
   val primes = sieve.getPrimes
