@@ -45,11 +45,11 @@ object Rational {
   implicit def LongToRational(x: Long) = new Rational(BigInt(x), BigInt(1))
 }
 case class Sieve(bound: Int) {
-  private val sieve = Array.fill(bound)(0)
+  private val sieve = Array.fill(bound)(0.toByte)
   (2 to math.sqrt(bound).toInt).foreach { x =>
     if (sieve(x) == 0)
       ((x + x) until bound by x).foreach { i =>
-        sieve(i) = sieve(i) + 1
+        sieve(i) = (sieve(i) + 1).toByte
       }
   }
   lazy val getPrimes = for (i <- 2 until bound; if sieve(i) == 0) yield i
