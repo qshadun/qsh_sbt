@@ -55,6 +55,6 @@ case class Sieve(bound: Int) {
   lazy val getPrimes = for (i <- 2 until bound; if sieve(i) == 0) yield i
   def isPrime(n: Int) = {
     require(n < bound && n > 0)
-    sieve(n) == 0
+    if (n == 1) false else sieve(n) == 0
   }
 }
