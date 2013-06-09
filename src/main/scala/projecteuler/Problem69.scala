@@ -30,21 +30,21 @@ object Problem69 {
           val denorm = fs.foldLeft(BigInt(1))(_ * _)
           (n * norm / denorm).toInt
         }
-    def subCalc(ls: Seq[Int]) = 
-      ls.map(n => (n, phi(n))).filter{case (n, p) => n.toString.sorted == p.toString.sorted}
-    val ab = ArrayBuffer.empty[(Int, Int)]
-    for (i <- 1 to 1000) {
-      val lb = if (i == 1) 2 else (i - 1) * 10000 
-      val ub = i * 10000
-      val sub = subCalc(lb until ub)
-      if (!sub.isEmpty) {
-        val min = sub.minBy{case (n, p) => n.toDouble / p}
-        ab.append(min)
-        println(min)
-      }
-    }
-    println("final result: " + ab.minBy{case (n, p) => n.toDouble / p})
-//    println(primes.scanLeft((1,1))((acc, x)=> (acc._1 * x, x)).takeWhile(_._1 <= 1000000).last)
+//    def subCalc(ls: Seq[Int]) = 
+//      ls.map(n => (n, phi(n))).filter{case (n, p) => n.toString.sorted == p.toString.sorted}
+//    val ab = ArrayBuffer.empty[(Int, Int)]
+//    for (i <- 1 to 1000) {
+//      val lb = if (i == 1) 2 else (i - 1) * 10000 
+//      val ub = i * 10000
+//      val sub = subCalc(lb until ub)
+//      if (!sub.isEmpty) {
+//        val min = sub.minBy{case (n, p) => n.toDouble / p}
+//        ab.append(min)
+//        println(min)
+//      }
+//    }
+//    println("final result: " + ab.minBy{case (n, p) => n.toDouble / p})
+    println(primes.scanLeft((1,1))((acc, x)=> (acc._1 * x, x)).takeWhile(_._1 <= 1000000).last)
 //   println((3 to 1000000).foldLeft((2, 2d)){(acc,n) => 
 //     val r = (n.toDouble / phi(n))
 //     if (r > acc._2) (n, r) else acc
