@@ -3,7 +3,7 @@ import scala.collection.mutable.ArrayBuffer
 //http://en.wikipedia.org/wiki/Euler's_totient_function
 object Problem69 {
   def main(args: Array[String]) = {
-    def sieve = Sieve(1000000)
+    val sieve = Sieve(1000000)
     def isPrime(n: Int) = if (n < 1000000) sieve.isPrime(n) else (2 to math.sqrt(n).toInt).forall(n % _ != 0)
     val primes = sieve.getPrimes
     def primeFactors(n: Int) = {
